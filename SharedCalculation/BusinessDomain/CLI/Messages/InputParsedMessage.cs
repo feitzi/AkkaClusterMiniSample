@@ -10,9 +10,7 @@ namespace SharedCalculation.BusinessDomain.CLI.Messages {
 
         public enum CommandType {
             Add,
-            Sub,
-            Mul,
-            Div,
+            UltimateQuestion,
             InvalidCommand
         }
 

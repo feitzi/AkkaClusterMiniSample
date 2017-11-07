@@ -64,16 +64,19 @@ namespace SharedCalculation.BusinessDomain.CLI {
             var calculator = Context.Child(CalculationCoordinatorName);
             switch (inputParsedMessage.Command) {
 
-                    case InputParsedMessage.CommandType.Add:
+                case InputParsedMessage.CommandType.Add:
                     calculator.Tell(new AddMessage(inputParsedMessage.Operand1, inputParsedMessage.Operand2, Self));
-                        break;
-                    case InputParsedMessage.CommandType.InvalidCommand:
+                    break;
+                case InputParsedMessage.CommandType.UltimateQuestion:
+                    calculator.Tell(new UltimateQuestion(Self));
+                    break;
+                case InputParsedMessage.CommandType.InvalidCommand:
                     Self.Tell(new AskUserForInputMessage("Input fehlerhaft. Probieren Sie es nochmals: "));
-                        return;
+                    return;
             }
             Become(WaitForResultBehavior);
         }
-        
+
 
         private void HandleAskUserForInput(AskUserForInputMessage askUserForInputMessage) {
             Context.Child(CONSOLE_READER_NAME).Tell(askUserForInputMessage);

@@ -95,7 +95,9 @@
     <Compile Include="BusinessDomain\Calculation\Actors\CalculationCoordinatorActor.cs" />
     <Compile Include="BusinessDomain\Calculation\Actors\CalculationResult\CalculationResultStoreActor.cs" />
     <Compile Include="BusinessDomain\Calculation\Actors\CalculationResult\Messages\ResultNotInCache.cs" />
-    <Compile Include="BusinessDomain\Calculation\Actors\SummationActor.cs" />
+    <Compile Include="BusinessDomain\Calculation\Actors\UltimateQuestionofLifeWorker.cs" />
+    <Compile Include="BusinessDomain\Calculation\Actors\SummationWorkerActor.cs" />
+    <Compile Include="BusinessDomain\Calculation\Messages\UltimateQuestion.cs" />
     <Compile Include="BusinessDomain\Calculation\Messages\AddMessage.cs" />
     <Compile Include="BusinessDomain\Calculation\Messages\CalculationResultMessage.cs" />
     <Compile Include="BusinessDomain\Calculation\Messages\ICalculationMessage.cs" />

@@ -1,17 +1,19 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Akka.Actor;
 using Akka.Cluster.Tools.PublishSubscribe;
 using SharedCalculation.BusinessDomain.Calculation.Messages;
 
 namespace SharedCalculation.BusinessDomain.Calculation.Actors
 {
-    public class SummationWorkerActor : ReceiveActor {
+    public class UltimateQuestionLifeWorker : ReceiveActor {
 
         private IActorRef cacheResultPublisher;
     
-        public SummationWorkerActor() {
+        public UltimateQuestionLifeWorker() {
 
-            Receive<AddMessage>(x => HandleAddMessage(x));
+            Receive<UltimateQuestion>(x => HandleUltimateQuestion(x));
         }
 
         protected override void PreStart() {
@@ -19,11 +21,11 @@ namespace SharedCalculation.BusinessDomain.Calculation.Actors
             cacheResultPublisher = DistributedPubSub.Get(Context.System).Mediator;
         }
 
-        private void HandleAddMessage(AddMessage addMessage) {
+        private void HandleUltimateQuestion(UltimateQuestion addMessage) {
 
-            Console.WriteLine($"Ich berechne die Aufgabe {addMessage.Summand1}+{addMessage.Summand2}");
-            var result = addMessage.Summand1 + addMessage.Summand2;
-            var resultMessage = new CalculationResultMessage(result, addMessage);
+            Console.WriteLine($"Ich berechne die Frage nach dem Leben, dem Universum und dem ganzen Rest");
+              Thread.Sleep(TimeSpan.FromSeconds(3));
+            var resultMessage = new CalculationResultMessage(42, addMessage);
             addMessage.ResultReceiver.Tell(resultMessage);
             cacheResultPublisher.Tell(new Publish("resultCache", resultMessage));
         }

@@ -14,6 +14,12 @@ namespace SharedCalculation.BusinessDomain.CLI {
                 Context.System.Terminate();
                 return;
             }
+
+            if (input.Equals("UltimateQuestionOfLife", StringComparison.CurrentCultureIgnoreCase)) {
+                Sender.Tell(new InputParsedMessage(InputParsedMessage.CommandType.UltimateQuestion, Double.NegativeInfinity, Double.NegativeInfinity));
+            }
+
+
             var splitInput = input.Split('+', '-');
 
             if (splitInput.Length != 2) {
