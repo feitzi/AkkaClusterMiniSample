@@ -15,10 +15,12 @@ namespace ClientNode
         {
             Console.WriteLine("CLIENT");
 
+            Console.WriteLine("Click to start");
+
+                Console.ReadLine();
             using (var system = ActorSystem.Create("calculation"))
             {
-                Console.WriteLine("Click to start");
-                Console.ReadLine();
+
                 system.ActorOf(Props.Create<CliClientActor>(), "cliClient");
                 system.WhenTerminated.Wait();
             }

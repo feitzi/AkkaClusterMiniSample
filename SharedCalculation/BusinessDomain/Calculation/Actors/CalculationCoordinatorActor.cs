@@ -22,20 +22,14 @@ namespace SharedCalculation.BusinessDomain.Calculation.Actors {
                 Context.Child(SumCalculationName).Forward(x.command);
                 }
             });
-            
-            Receive<Terminated>(x => {
-                Console.WriteLine("Sender terminated!");
-                Self.Tell(PoisonPill.Instance);
-            });
+  
         }
         
         protected override void PreStart() {
+            //base.PreStart();
             Console.WriteLine("CalculationCoordinatorActor started");
-            base.PreStart();
             Context.ActorOf(Props.Create<SummationActor>().WithRouter(new RoundRobinPool(5)), SumCalculationName);
             Context.ActorOf(Props.Create<CalculationResultStoreActor>(), CacheName);
-
-            Context.Watch(Context.Parent);
 
         }
 
