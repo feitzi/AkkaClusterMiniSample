@@ -28,9 +28,6 @@ namespace SharedCalculation.BusinessDomain.CLI {
             Self.Tell(new AskUserForInputMessage("Frage.."));
 
             Become(DefaultBehavior);
-
-
-
         }
 
         public CliClientActor() {
@@ -68,7 +65,7 @@ namespace SharedCalculation.BusinessDomain.CLI {
             switch (inputParsedMessage.Command) {
 
                     case InputParsedMessage.CommandType.Add:
-                    calculator.Tell(new AddMessage(inputParsedMessage.Operand1, inputParsedMessage.Operand2));
+                    calculator.Tell(new AddMessage(inputParsedMessage.Operand1, inputParsedMessage.Operand2, Self));
                         break;
                     case InputParsedMessage.CommandType.InvalidCommand:
                     Self.Tell(new AskUserForInputMessage("Input fehlerhaft. Probieren Sie es nochmals: "));
